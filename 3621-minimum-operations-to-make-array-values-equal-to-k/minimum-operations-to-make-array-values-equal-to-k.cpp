@@ -7,22 +7,14 @@ public:
             if(nums[i]<k)
                 return -1;
         }
-        nums.push_back(k);
-        priority_queue<int>pq;
-        for(int num:nums)
-            pq.push(num);
-        int cnt=-1;
-        while(pq.top()>=k)
+        unordered_set<int>myset;
+        for(int i=0;i<n;i++)
         {
-            if(pq.top()==k)
+            if(nums[i]>k)
             {
-                return cnt+1;
+                myset.insert(nums[i]);
             }
-            int prev_pop=pq.top();
-            while(prev_pop==pq.top())
-                pq.pop();
-            cnt++;
         }
-        return -1;
+        return myset.size();
     }
 };
