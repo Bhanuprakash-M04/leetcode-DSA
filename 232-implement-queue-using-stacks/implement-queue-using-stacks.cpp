@@ -3,10 +3,10 @@ public:
     stack<int>st1;
     stack<int>st2;
     MyQueue() {
-        while(!st1.empty())
-            st1.pop();
-        while(!st2.empty())
-            st2.pop();
+        // while(!st1.empty())
+        //     st1.pop();
+        // while(!st2.empty())
+        //     st2.pop();
     }
     
     void push(int x) {
