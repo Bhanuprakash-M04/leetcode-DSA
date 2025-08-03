@@ -8,7 +8,7 @@ public:
         priority_queue<pair<int,char>>pq;
         for(auto [ch,cnt]:mymap){
             pq.push({cnt,ch});
-        }
+        }                                       //hashmap+priority_queue
         string ans="";
         while(!pq.empty()){
             auto [ch,cnt]=pq.top();
