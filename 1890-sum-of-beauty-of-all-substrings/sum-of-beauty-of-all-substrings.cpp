@@ -5,15 +5,16 @@ public:
         int ans=0;
         for(int i=0;i<n;i++){
             unordered_map<char,int>mymap;
+            multiset<int>myset;
             for(int j=i;j<n;j++){
-                int m=0;
-                int l=INT_MAX;
+                if(mymap.find(s[j])!=mymap.end())
+                    myset.erase(myset.find(mymap[s[j]]));
                 mymap[s[j]]++;
-                for(auto i:mymap){
-                    m=max(m,i.second);
-                    l=min(l,i.second);
-                }
-                ans+=(m-l);
+                myset.insert(mymap[s[j]]);
+
+                int lf=*myset.begin();
+                int mf=*myset.rbegin();
+                ans+=(mf-lf);
             }
         }
         return ans;
