@@ -13,12 +13,31 @@ class Solution {
 public:
     TreeNode* prev=NULL;
     void flatten(TreeNode* root) {
+        // if(root==NULL)
+        //     return;
+        // flatten(root->right);
+        // flatten(root->left);
+        // root->right=prev;                                            recursive
+        // root->left=NULL;
+        // prev=root;
+
+
         if(root==NULL)
-            return;
-        flatten(root->right);
-        flatten(root->left);
-        root->right=prev;
-        root->left=NULL;
-        prev=root;
+            return ;
+        stack<TreeNode*>st;
+        st.push(root);
+        while(!st.empty()){
+            TreeNode* tmp=st.top();
+            st.pop();
+            if(tmp->right)
+                st.push(tmp->right);
+            if(tmp->left)
+                st.push(tmp->left);
+            if(!st.empty())
+            {
+                tmp->right=st.top();
+                tmp->left=NULL;
+            }
+        }
     }
 };
