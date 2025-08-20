@@ -11,19 +11,18 @@ public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         if(headA==NULL || headB==NULL)
             return NULL;
-        unordered_set<ListNode*>myset;
-        ListNode* temp=headA;
-        while(temp){
-            myset.insert(temp);
-            temp=temp->next;
+        ListNode* t1=headA;
+        ListNode* t2=headB;
+        while(t1!=t2){
+            t1=t1->next;
+            t2=t2->next;
+            if(t1==t2)
+                return t1;
+            if(t1==NULL)
+                t1=headB;
+            if(t2==NULL)
+                t2=headA;
         }
-        temp=headB;
-        while(temp){
-            if(myset.find(temp)!=myset.end()){
-                return temp;
-            }
-            temp=temp->next;
-        }
-        return NULL;
+        return t1;
     }
 };
