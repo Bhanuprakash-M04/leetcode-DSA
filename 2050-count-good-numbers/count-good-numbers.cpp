@@ -1,22 +1,17 @@
 class Solution {
-private:
-    static constexpr int mod = 1000000007;
-
 public:
+    int m=1e9+7;
+    long long solve(long long ans,long long base,long long power){
+        if(power==0)
+            return ans;
+        if(power%2==0)
+            return solve(ans,(base*base)%m,power/2);
+        else
+            return solve((ans*base)%m,base,power-1);
+    }
     int countGoodNumbers(long long n) {
-        // use fast exponentiation to calculate x^y % mod
-        auto quickmul = [](int x, long long y) -> int {
-            int ret = 1, mul = x;
-            while (y > 0) {
-                if (y % 2 == 1) {
-                    ret = (long long)ret * mul % mod;
-                }
-                mul = (long long)mul * mul % mod;
-                y /= 2;
-            }
-            return ret;
-        };
-
-        return (long long)quickmul(5, (n + 1) / 2) * quickmul(4, n / 2) % mod;
+        long long even=(n+1)/2;
+        long long odd=(n/2);
+        return (solve(1,5,even)%m * solve(1,4,odd)%m)%m;
     }
 };
