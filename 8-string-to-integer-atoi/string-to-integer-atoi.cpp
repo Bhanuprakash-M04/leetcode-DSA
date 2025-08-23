@@ -2,44 +2,37 @@ class Solution {
 public:
     int myAtoi(string s) {
         int n=s.length();
-        int i=0;
-        bool flag=false;
-        long res=0;
-        char val='+';
-        while(i<n){
-            if(s[i]==' '){
-                if(res==0 && !flag && val=='+')
-                {
-                    i++;
-                    continue;
+        long long ans=0;
+        bool sign=true;
+        bool flag=true;
+        int val='+';
+        for(int i=0;i<n;i++){
+            if(s[i]==' ' && flag){
+                continue;
+            }
+            else if((s[i]=='+' || s[i]=='-')){
+                if(ans==0 && sign && flag){
+                    val=s[i];
+                    sign=false;
+                    flag=false;
                 }
                 else
                     break;
             }
-            else if((s[i]=='+' || s[i]== '-') && res==0 && !flag)
+            else if(s[i]>='0' && s[i]<='9')
             {
-                val=s[i];
-                flag=true;
-            }
-            else if(s[i]=='+' || s[i]== '-')
-                break;
-            else if(s[i]>='0' && s[i]<='9'){
-                flag=true;
-                res=res*10+(s[i]-'0');
-                if(-res<INT_MIN && val=='-')
+                flag=false;
+                ans=(ans*10)+(s[i]-'0');
+                if(-ans<INT_MIN && val=='-')
                     return INT_MIN;
-                if(res>INT_MAX && val=='+')
+                if(ans>INT_MAX && val=='+')
                     return INT_MAX;
             }
-            else{
+            else
                 break;
-            }
-            i++;
-            
         }
         if(val=='-')
-            res=-res;
-        return res;
-        
+            ans=-ans;
+        return ans;
     }
 };
