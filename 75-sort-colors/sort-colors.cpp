@@ -1,33 +1,23 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        int n=nums.size();
-        int zero=0,one=0,two=0;
-        for(int num:nums){
-            if(num==0)
-                zero++;
-            else if(num==1)
-                one++;
-            else
-                two++;
-        }
-        for(int i=0;i<n;i++){
-            if(zero>0)
-            {
-                nums[i]=0;
-                zero--;
+        //DUTCH NATIONAL FLAG ALGORITHM
+        int p1=0;
+        int p2=0;
+        int p3=nums.size()-1;
+        while(p2<=p3){
+            if(nums[p2]==0){
+                swap(nums[p2],nums[p1]);
+                p1++;
+                p2++;
             }
-            else if(one>0)
-            {
-                nums[i]=1;
-                one--;
+            else if(nums[p2]==1){
+                p2++;
             }
-            else
-            {
-                nums[i]=2;
-                two--;
+            else{
+                swap(nums[p2],nums[p3]);
+                p3--;
             }
         }
-
     }
 };
