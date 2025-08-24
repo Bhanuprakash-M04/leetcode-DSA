@@ -8,8 +8,8 @@ public:
         {
             if(curr>prices[i])
                 curr=prices[i];
-            else if(prices[i]-curr>profit)
-                profit=prices[i]-curr;
+            else
+                profit=max(profit,prices[i]-curr);
         }
         return profit;
     }
