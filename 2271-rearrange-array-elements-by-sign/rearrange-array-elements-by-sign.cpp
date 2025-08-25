@@ -3,22 +3,17 @@ public:
     vector<int> rearrangeArray(vector<int>& nums) {
         int n=nums.size();
         vector<int>ans(n);
-        vector<int>pos;
-        vector<int>neg;
+        int p1=0;
+        int p2=1;
         for(int num:nums){
-            if(num<0)
-                neg.push_back(num);
-            else
-                pos.push_back(num);
-        }
-        int e=0;
-        int o=0;
-        for(int i=0;i<n;i++){
-            if(i%2==0){
-                ans[i]=pos[e++];
+            if(num<0){
+                ans[p2]=num;
+                p2+=2;
             }
-            else
-                ans[i]=neg[o++];
+            else{
+                ans[p1]=num;
+                p1+=2;
+            }
         }
         return ans;
     }
