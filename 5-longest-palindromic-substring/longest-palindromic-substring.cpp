@@ -16,12 +16,11 @@ public:
     }
     string palindrome(int p1,int p2,string s){
         string res="";
-        while(s[p1]==s[p2]){
+        while(p1>=0 && p2<s.length() && s[p1]==s[p2]){
             res=s.substr(p1,p2-p1+1);
             p1--;
             p2++;
-            if(p1==-1 || p2==s.length())
-                break;
+            
         }
         return res;
     }
