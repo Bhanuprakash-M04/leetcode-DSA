@@ -6,10 +6,8 @@ public:
         int curr=prices[0];
         for(int i=1;i<n;i++)
         {
-            if(curr>prices[i])
-                curr=prices[i];
-            else
-                profit=max(profit,prices[i]-curr);
+            curr=min(curr,prices[i]);
+            profit=max(profit,prices[i]-curr);
         }
         return profit;
     }
