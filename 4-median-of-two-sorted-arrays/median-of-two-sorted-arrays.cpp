@@ -3,46 +3,37 @@ public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         int n=nums1.size();
         int m=nums2.size();
-        int sec_ind=(n+m)/2;
-        int first_ind=sec_ind-1;
-        int first_ele=-1,sec_ele=-1;
-        int p1=0, p2=0,cnt=0;
-        while(p1<n && p2<m){
-            if(nums1[p1]<nums2[p2]){
-                if(cnt==first_ind)
-                    first_ele=nums1[p1];
-                if(cnt==sec_ind)
-                    sec_ele=nums1[p1];
-                p1++;
-                cnt++;
+        int x=n+m;
+        if(n>m)
+            return findMedianSortedArrays(nums2,nums1);
+        int left=(n+m+1)/2;
+        int low=0;
+        int high=n;
+        while(low<=high){
+            int mid1=(low+high)/2;
+            int mid2=left-mid1;
+            int l1=INT_MIN;
+            int l2=INT_MIN;
+            int r1=INT_MAX;
+            int r2=INT_MAX;
+            if(mid1<n)
+                r1=nums1[mid1];
+            if(mid2<m)
+                r2=nums2[mid2];
+            if(mid1-1>=0)
+                l1=nums1[mid1-1];
+            if(mid2-1>=0)
+                l2=nums2[mid2-1];
+            if(l1<=r2 && l2<=r1){
+                if(x%2!=0)
+                    return max(l1,l2);
+                return (double)(max(l1,l2)+min(r1,r2))/2.0;
             }
-            else{
-                if(cnt==first_ind)
-                    first_ele=nums2[p2];
-                if(cnt==sec_ind)
-                    sec_ele=nums2[p2];
-                p2++;
-                cnt++;
-            }
-            if(sec_ele!=-1)
-                break;
+            else if(l2>r1)
+                low=mid1+1;
+            else
+                high=mid1-1;
         }
-        while(p1<n && sec_ele==-1){
-            if(cnt==first_ind)
-                first_ele=nums1[p1];
-            if(cnt==sec_ind)
-                sec_ele=nums1[p1];
-            p1++;
-            cnt++;
-        }
-        while(p2<m && sec_ele==-1){
-            if(cnt==first_ind)
-                first_ele=nums2[p2];
-            if(cnt==sec_ind)
-                sec_ele=nums2[p2];
-            p2++;
-            cnt++;
-        }
-        return (n+m)%2==0 ? ((double)first_ele+(double)sec_ele)/2 : (double)sec_ele;
+        return 0;
     }
 };
