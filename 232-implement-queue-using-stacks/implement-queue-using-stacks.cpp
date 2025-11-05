@@ -3,10 +3,7 @@ public:
     stack<int>st1;
     stack<int>st2;
     MyQueue() {
-        // while(!st1.empty())
-        //     st1.pop();
-        // while(!st2.empty())
-        //     st2.pop();
+        
     }
     
     void push(int x) {
@@ -14,7 +11,7 @@ public:
             st2.push(st1.top());
             st1.pop();
         }
-        st2.push(x);
+        st1.push(x);
         while(!st2.empty()){
             st1.push(st2.top());
             st2.pop();
@@ -22,19 +19,21 @@ public:
     }
     
     int pop() {
-        int ans=st1.top();
+        if(st1.empty())
+            return -1;
+        int ele=st1.top();
         st1.pop();
-        return ans;
+        return ele;
     }
     
     int peek() {
+        if(st1.empty())
+            return -1;
         return st1.top();
     }
     
     bool empty() {
-        if(st1.empty())
-            return true;
-        return false;
+        return st1.empty();
     }
 };
 
