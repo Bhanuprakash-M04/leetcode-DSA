@@ -4,19 +4,28 @@ public:
         vector<int>ans;
         int n=nums1.size();
         int m=nums2.size();
-        for(int i=0;i<n;i++){
-            int j=0;
-            while(j<m && nums1[i]!=nums2[j]){
-                j++;
+        stack<int>st;
+        unordered_map<int,int>mymap;
+        for(int i=m-1;i>=0;i--){
+            if(st.empty()){
+                mymap[nums2[i]]=-1;
+                st.push(nums2[i]);
             }
-            j++;
-            while(j<m && nums1[i]>nums2[j]){
-                j++;
-            }
-            if(j<m)
-                ans.push_back(nums2[j]);
-            else
-                ans.push_back(-1);
+            else{
+                while(!st.empty() && nums2[i]>=st.top())
+                    st.pop();
+                if(st.empty()){
+                    mymap[nums2[i]]=-1;
+                    st.push(nums2[i]);
+                }
+                else{
+                    mymap[nums2[i]]=st.top();
+                    st.push(nums2[i]);
+                }
+            }  
+        }
+        for(int num:nums1){
+             ans.push_back(mymap[num]);
         }
         return ans;
     }
