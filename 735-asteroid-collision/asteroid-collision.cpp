@@ -7,19 +7,13 @@ public:
             if(num>0){
                 st.push(num);
             }
-            else if(num<0 && (st.empty() || st.top()<0)){
-                st.push(num);
-            }
             else{
-                while(!st.empty() && st.top()>0 && st.top()<-num){
+                while(!st.empty() && st.top()>0 && st.top()<-num)
                     st.pop();
-                }
-                if(!st.empty() && st.top()==-num){
-                    st.pop();
-                    continue;
-                }
                 if(st.empty() || st.top()<0)
                     st.push(num);
+                if(st.top()==-num)
+                    st.pop();
             }
         }
         while(!st.empty()){
