@@ -7,12 +7,14 @@ public:
         int right=0;
         int cnt=0;
         while(right<n){
-            if(nums[right]==0 && cnt<k){
+            if(nums[right]==0){
                 cnt++;
             }
-            else if(nums[right]==0 && cnt>=k){
-                while(nums[left]!=0){
+            while(cnt>k){
+                if(nums[left]==0){
+                    cnt--;
                     left++;
+                    break;
                 }
                 left++;
             }
