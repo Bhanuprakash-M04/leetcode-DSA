@@ -4,22 +4,17 @@ public:
         int n=nums.size();
         int ans=0;
         int left=0;
-        int right=0;
         int cnt=0;
-        while(right<n){
-            if(nums[right]==0){
+        for(int right=0;right<n;right++){
+            if(nums[right]==0)
                 cnt++;
-            }
-            while(cnt>k){
-                if(nums[left]==0){
+            if(cnt>k){
+                if(nums[left]==0)
                     cnt--;
-                    left++;
-                    break;
-                }
                 left++;
             }
-            ans=max(ans,right-left+1);
-            right++;
+            if(cnt<=k)
+                ans=max(ans,right-left+1);
         }
         return ans;
     }
